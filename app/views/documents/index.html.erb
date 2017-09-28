@@ -1,0 +1,29 @@
+<h1>CSV File Upload in Rails </h1>
+
+<h2>Listing documents</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>File Name</th>
+      <th>Date</th>
+      <th>Download</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @documents.each_with_index do |document, idx| %>
+      <tr>
+        <th scope="row"><%= idx + 1 %></th>
+        <td><%= document.filename%></td>
+        <th><%= document.created_at %></th>
+        <th><%= button_to 'Download', document, method: :get, class: 'btn btn-danger'%></th>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
+<%= link_to 'New Document', new_document_path, class: "btn btn-success" %>
