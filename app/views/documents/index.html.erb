@@ -29,11 +29,13 @@
 
 
 <%= form_for Document.new, :html => { :multipart => true, :id => "fileupload" } do |f| %>
-  <%= f.label :file, 'Upload CSV file' %>
-  <%= f.file_field :file, multiple: true, name: "document[file]" %>
 
-  <br>
-  <br>
+  <div class="image-upload-wrap">
+    <%= f.file_field :file, multiple: true, name: "document[file]", class: "file-upload-input" %>
+    <div class="drag-text">
+      <h3>Drag and drop a file or select add CSV</h3>
+    </div>
+  </div>
 <% end %>
 
 <script id="template-upload" type="text/x-tmpl">
