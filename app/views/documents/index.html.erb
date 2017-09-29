@@ -46,20 +46,6 @@
 </script>
 
 
-
-
-<script>
-  var fileUploadErrors = {
-  maxFileSize: 'File is too big',
-  minFileSize: 'File is too small',
-  acceptFileTypes: 'Filetype not allowed',
-  maxNumberOfFiles: 'Max number of files exceeded',
-  uploadedBytes: 'Uploaded bytes exceed file size',
-  emptyResult: 'Empty file upload result'
-  };
-</script>
-
-
 <script type="text/javascript" charset="utf-8">
   $(function() {
   return $('#fileupload').fileupload({
@@ -69,17 +55,25 @@
       types = /(\.|\/)(csv)$/i;
       fileSize = 1048576;
       file = data.files[0];
+      console.log(e, data)
+      
       if (file.size < fileSize) {
-        if (types.test(file.type) || types.test(file.name)) {
-          data.context = $(tmpl("template-upload", file));
-          $('#fileupload').append(data.context);
-          return data.submit();
-        } else {
-          return toastr.warning(file.size, 'CSV File only!')
+        try {
+          if (types.test(file.type) || types.test(file.name)) {
+            data.context = $(tmpl("template-upload", file));
+            $('#fileupload').append(data.context);
+            return data.submit();
+          } else {
+            return toastr.warning(file.name, 'CSV File only!')
+          }
+        } catch(e) {
+          return toastr.error(e);
         }
+
       } else {
         return toastr.warning(file.size, 'CSV file size cant be more then 1MB!')
       }
+
 
     },
     progress: function(e, data) {
