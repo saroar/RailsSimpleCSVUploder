@@ -65,14 +65,20 @@
     add: function(e, data) {
       var file, types;
       types = /(\.|\/)(csv)$/i;
+      fileSize = 1048576;
       file = data.files[0];
-      if (types.test(file.type) || types.test(file.name)) {
-        data.context = $(tmpl("template-upload", file));
-        $('#fileupload').append(data.context);
-        return data.submit();
+      if (file.size < fileSize) {
+        if (types.test(file.type) || types.test(file.name)) {
+          data.context = $(tmpl("template-upload", file));
+          $('#fileupload').append(data.context);
+          return data.submit();
+        } else {
+          return toastr.warning(file.size, 'CSV File only!')
+        }
       } else {
-        return alert(file.name + " is not a CSV file");
+        return toastr.warning(file.size, 'CSV file size cant be more then 1MB!')
       }
+
     },
     progress: function(e, data) {
       var progress;
