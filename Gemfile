@@ -51,3 +51,4 @@ gem 'SimpleCSVUploder'
 
 gem 'jquery-ui-rails'
 gem 'jquery-fileupload-rails'
+gem 'toastr-rails'
