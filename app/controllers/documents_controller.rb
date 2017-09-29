@@ -38,6 +38,7 @@ class DocumentsController < ApplicationController
         format.json { render json: @document.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PATCH/PUT /documents/1
